@@ -8,11 +8,16 @@ class DocsController < ApplicationController
   def show
   end
 
+  def edit
+  end 
+
   def new
     @doc = Doc.new
   end
 
   def destroy
+    @doc.destroy
+    redirect_to docs_path
   end
 
   def create
@@ -25,7 +30,11 @@ class DocsController < ApplicationController
   end
 
   def update
-    
+    if @doc.update(doc_params)
+      redirect_to @docs
+    else
+      render 'edit'
+    end
   end
 
   private 
